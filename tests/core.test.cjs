@@ -14,15 +14,26 @@ test('non-array and malformed app list is safe', () => {
   assert.deepEqual(core.normalizeApps(null,''),[]);
   assert.deepEqual(core.normalizeApps([{}, {name:'No ID'}],''),[]);
 });
-test('home sorts favourites first and limits tiles to twelve', () => {
+test('home shows every discovered app with favourites first', () => {
   const apps = Array.from({length:15},(_,i)=>({id:String(i),name:'App '+String(i).padStart(2,'0')}));
   const results = core.filterApps(apps,'','home',['14','13']);
-  assert.equal(results.length,12);
+  assert.equal(results.length,15);
   assert.deepEqual(results.slice(0,2).map(a=>a.id),['13','14']);
 });
-test('search is case insensitive and takes precedence over home tile limit', () => {
+test('search is case insensitive', () => {
   const apps = [{id:'1',name:'Music'}, {id:'2',name:'Movies'}, {id:'3',name:'Photos'}];
   assert.deepEqual(core.filterApps(apps,'MUS','home',[]).map(a=>a.id),['1']);
+});
+test('normalization preserves source and verified icon metadata', () => {
+  const list = core.normalizeApps([{id:'native.X',name:'  Netflix  ',kind:'native',icon:true,show:true}], '');
+  assert.equal(list[0].kind,'native');
+  assert.equal(list[0].icon,true);
+  assert.equal(list[0].name,'Netflix');
+});
+test('merge keeps both native and module apps with same ids distinct', () => {
+  const list = core.mergeApps([{id:'tv.music',name:'Music',kind:'native'}],[{id:'tv.music',name:'Music Module',kind:'module'}]);
+  assert.equal(list.length,2);
+  assert.deepEqual(list.map(a=>a.key).sort(),['module:tv.music','native:tv.music']);
 });
 test('favourites only returns saved ids', () => {
   const apps = [{id:'1',name:'One'}, {id:'2',name:'Two'}];

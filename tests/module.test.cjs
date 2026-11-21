@@ -12,7 +12,8 @@ test('TizenBrew manifest specifies a valid self-contained application module', (
   assert.equal(pkg.appPath, 'app/index.html');
   assert.ok(Array.isArray(pkg.keys));
   assert.ok(fs.existsSync(path.join(base, pkg.appPath)));
-  assert.equal(pkg.serviceFile, undefined, 'no background-service privileges');
+  assert.equal(pkg.serviceFile, 'service.js');
+  assert.ok(fs.existsSync(path.join(base, pkg.serviceFile)));
 });
 
 test('TV app links stay relative and bundled, without a Tizen Studio manifest', () => {
@@ -23,10 +24,16 @@ test('TV app links stay relative and bundled, without a Tizen Studio manifest', 
   assert.equal(fs.existsSync(path.join(base, 'config.xml')), false);
 });
 
-test('TizenBrew bridge uses module protocol and excludes Tizen device APIs', () => {
+test('TizenBrew UI uses module protocol and delegates native APIs to a local service', () => {
   const app = fs.readFileSync(path.join(base, 'app/app.js'), 'utf8');
   assert.match(app, /ws:\/\/127\.0\.0\.1:8081/);
   assert.match(app, /type: 4/);
   assert.match(app, /type: 5, payload: module/);
+  assert.match(app, /127\.0\.0\.1:8094/);
   assert.doesNotMatch(app, /tizen\.application\./);
+  const service = fs.readFileSync(path.join(base, 'service.js'), 'utf8');
+  assert.match(service, /tizen\.application|appApi\.launch/);
+  assert.match(service, /127\.0\.0\.1/);
+  assert.match(service, /req\.headers\.origin/);
+  assert.match(service, /knownApps\[id\]/);
 });
