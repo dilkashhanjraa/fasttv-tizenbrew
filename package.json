@@ -1,10 +1,11 @@
 {
   "name": "fasttv-dilkash-tizenbrew",
-  "version": "1.0.0",
-  "description": "A fast Windows-style dashboard for installed TizenBrew application modules.",
+  "version": "2.0.0",
+  "description": "Apple TV-inspired launcher for installed Samsung TV apps and TizenBrew modules.",
   "packageType": "app",
   "appName": "FastTV - Dilkash Edition",
   "appPath": "app/index.html",
+  "serviceFile": "service.js",
   "keys": [],
   "license": "MIT",
   "keywords": ["tizenbrew", "samsung-tv", "dashboard", "launcher", "fasttv"],
