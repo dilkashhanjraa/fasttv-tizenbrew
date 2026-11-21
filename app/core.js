@@ -12,12 +12,25 @@
     return items.filter(function (app) {
       if (!app || typeof app.id !== 'string' || typeof app.name !== 'string') return false;
       if (!app.id || !app.name.trim() || app.id === ownId || app.show === false) return false;
-      if (seen[app.id]) return false;
-      seen[app.id] = true;
+      var key = (app.kind === 'native' ? 'native:' : 'module:') + app.id;
+      if (seen[key]) return false;
+      seen[key] = true;
       return true;
     }).map(function (app) {
-      return { id: app.id, name: app.name.trim(), iconPath: app.iconPath || '', demo: !!app.demo };
-    }).sort(function (a, b) { return a.name.toLowerCase().localeCompare(b.name.toLowerCase()); });
+      var kind = app.kind === 'native' ? 'native' : 'module';
+      return { id: app.id, key: kind + ':' + app.id, kind: kind,
+        name: app.name.trim(), iconPath: app.iconPath || '', icon: app.icon === true,
+        demo: !!app.demo };
+    }).sort(compareApps);
+  }
+
+  function compareApps(a, b) {
+    var nameComparison = a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+    return nameComparison || (a.kind === 'module' ? -1 : 1);
+  }
+
+  function mergeApps(nativeApps, modules) {
+    return normalizeApps([].concat(nativeApps || [], modules || []), '');
   }
 
   function filterApps(apps, query, view, favorites) {
@@ -25,15 +38,14 @@
     var favs = Array.isArray(favorites) ? favorites : [];
     var filtered = apps.filter(function (app) {
       return (!text || app.name.toLowerCase().indexOf(text) !== -1) &&
-        (view !== 'favorites' || favs.indexOf(app.id) !== -1);
+        (view !== 'favorites' || favs.indexOf(app.key || app.id) !== -1 || favs.indexOf(app.id) !== -1);
     });
     if (view === 'home' && !text) {
       filtered.sort(function (a, b) {
-        var favA = favs.indexOf(a.id) !== -1 ? 1 : 0;
-        var favB = favs.indexOf(b.id) !== -1 ? 1 : 0;
-        return favB - favA || a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+        var favA = favs.indexOf(a.key || a.id) !== -1 || favs.indexOf(a.id) !== -1 ? 1 : 0;
+        var favB = favs.indexOf(b.key || b.id) !== -1 || favs.indexOf(b.id) !== -1 ? 1 : 0;
+        return favB - favA || compareApps(a, b);
       });
-      return filtered.slice(0, 12);
     }
     return filtered;
   }
@@ -56,5 +68,6 @@
     } catch (error) { return []; }
   }
 
-  return { normalizeApps: normalizeApps, filterApps: filterApps, toggleFavorite: toggleFavorite, readFavorites: readFavorites };
+  return { normalizeApps: normalizeApps, mergeApps: mergeApps,
+    filterApps: filterApps, toggleFavorite: toggleFavorite, readFavorites: readFavorites };
 }));

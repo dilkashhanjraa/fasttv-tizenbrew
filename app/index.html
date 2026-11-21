@@ -3,79 +3,83 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
-  <title>FastTV · Dilkash Edition</title>
+  <title>FastTV | Dilkash Edition</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="shell">
-    <aside class="sidebar" aria-label="Main navigation">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-        <div><strong>Fast<span>TV</span></strong><small>DILKASH EDITION</small></div>
+  <div class="wallpaper" aria-hidden="true"><span class="light-one"></span><span class="light-two"></span></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="FastTV Dilkash Edition">
+        <span class="brand-symbol"><i></i><i></i><i></i><i></i></span>
+        <span class="brand-word">Fast<span>TV</span><small>DILKASH EDITION</small></span>
       </div>
-      <div class="sidebar-label">YOUR SPACE</div>
-      <nav id="navigation">
-        <button class="nav-item focusable active" data-view="home"><span class="nav-icon">⌂</span><span>Home</span></button>
-        <button class="nav-item focusable" data-view="apps"><span class="nav-icon">▦</span><span>Modules</span></button>
-        <button class="nav-item focusable" data-view="favorites"><span class="nav-icon">☆</span><span>Favourites</span></button>
-        <button class="nav-item focusable" data-view="about"><span class="nav-icon">⚙</span><span>About &amp; help</span></button>
+      <nav class="primary-nav" aria-label="Launcher navigation">
+        <button class="nav-item focusable active" data-view="home">Home</button>
+        <button class="nav-item focusable" data-view="apps">All Apps</button>
+        <button class="nav-item focusable" data-view="favorites">Favourites</button>
+        <button class="nav-item focusable" data-view="about">Help</button>
       </nav>
-      <div class="sidebar-bottom">
-        <div class="device-indicator"><span class="online-dot"></span><span id="device-label">Connecting TizenBrew...</span></div>
-        <p>Built for TizenBrew<br />Samsung TU7000 · Tizen 5.5</p>
+      <div class="top-status">
+        <span class="connection-dot" aria-hidden="true"></span>
+        <span id="device-label">Finding your apps</span>
+        <time id="clock">--:--</time>
       </div>
-    </aside>
+    </header>
 
-    <main class="workspace">
-      <header class="topbar">
-        <div><span class="eyebrow">DASHBOARD</span><span class="divider-mini">/</span><span id="breadcrumb">Overview</span></div>
-        <div class="topbar-right"><span class="status-pill"><span class="status-dot"></span>LIGHTWEIGHT MODE</span><time id="clock">--:--</time></div>
-      </header>
-
-      <section class="hero" id="hero">
-        <div class="hero-glow"></div>
-        <div class="hero-copy">
-          <span class="hero-badge">✦ YOUR TIZENBREW DASHBOARD</span>
-          <h1>Your TV.<br /><em>At your speed.</em></h1>
-          <p>Your TizenBrew modules, one simple place.<br />Just your shortcuts. No clutter.</p>
+    <main class="main-content" id="main-content">
+      <section class="feature" id="hero" aria-labelledby="hero-title">
+        <div class="feature-grain" aria-hidden="true"></div>
+        <div class="feature-copy">
+          <span class="eyebrow"><span class="sparkle">✦</span> YOUR PERSONAL TV SPACE</span>
+          <h1 id="hero-title">Everything you love.<br /><em>One beautiful home.</em></h1>
+          <p>All your entertainment together, with the apps you love only one click away.</p>
           <div class="hero-actions">
-            <button class="primary-btn focusable" id="browse-btn">Browse modules <span>→</span></button>
-            <button class="secondary-btn focusable" id="refresh-btn">↻ &nbsp;Refresh</button>
+            <button id="browse-btn" class="hero-button focusable">Explore apps <span>→</span></button>
+            <button id="hero-refresh" class="subtle-button focusable">↻ &nbsp; Sync TV apps</button>
           </div>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="mock-window">
-            <div class="mock-window-top"><span class="mock-dots">● ● ●</span><span>FASTTV / HOME</span><span>✦</span></div>
-            <div class="mock-window-body">
-              <div class="mock-side"><div></div><div></div><div></div></div>
-              <div class="mock-content"><div class="mock-line long"></div><div class="mock-line short"></div><div class="mock-cards"><div>▶</div><div>◈</div><div>♫</div></div></div>
-            </div>
-          </div>
-          <div class="orbit o1"></div><div class="orbit o2"></div>
+        <div class="feature-visual" aria-hidden="true">
+          <div class="glass-panel glass-a"><span>▶</span></div>
+          <div class="glass-panel glass-b"><span>♫</span></div>
+          <div class="glass-panel glass-c"><span>✦</span></div>
         </div>
+        <div class="feature-bottom"><span>FASTTV ORIGINAL HOME</span><span>MADE FOR YOUR SAMSUNG TV</span></div>
       </section>
 
-      <section class="app-section" aria-labelledby="section-title">
-        <div class="section-head">
-          <div><span class="eyebrow" id="section-kicker">QUICK ACCESS</span><h2 id="section-title">Your modules <span class="app-count" id="app-count">0</span></h2></div>
-          <div class="section-tools">
-            <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" class="focusable" type="search" placeholder="Find a module..." aria-label="Search TizenBrew modules" /></label>
-            <button class="text-button focusable" id="view-all-btn">View all <span>→</span></button>
+      <section class="apps-section" aria-labelledby="section-title">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow" id="section-kicker">READY WHEN YOU ARE</span>
+            <h2 id="section-title">Your Apps</h2>
+            <p id="section-subtitle">Discovering apps on your Samsung TV…</p>
+          </div>
+          <div class="section-actions">
+            <label class="search-wrap">
+              <span aria-hidden="true">⌕</span>
+              <input class="focusable" id="search" type="search" placeholder="Search apps" aria-label="Search installed apps" />
+            </label>
+            <button class="round-button focusable" id="refresh-btn" title="Rescan apps" aria-label="Rescan installed apps">↻</button>
           </div>
         </div>
         <div id="app-grid" class="app-grid" aria-live="polite"></div>
         <div id="empty-state" class="empty-state" hidden>
-          <span class="empty-icon">▦</span><h3>No modules to show</h3><p id="empty-message">Try another search.</p>
-          <button class="secondary-btn focusable" id="empty-action">Show all modules</button>
+          <span class="empty-mark" aria-hidden="true">✦</span>
+          <h3 id="empty-title">Finding your apps</h3>
+          <p id="empty-message">We're checking which TV apps FastTV can access.</p>
+          <button id="empty-action" class="hero-button focusable">Try again ↻</button>
         </div>
         <div id="about-card" class="about-card" hidden>
-          <h3>FastTV inside TizenBrew</h3>
-          <p>Launches application modules already installed in TizenBrew. It cannot enumerate or launch Samsung's built-in apps, replace the TV's home or firmware, or accelerate its CPU or RAM.</p>
-          <div class="about-grid"><div><span>MODEL TARGET</span><strong>Samsung TU7000</strong></div><div><span>PLATFORM</span><strong>TizenBrew</strong></div><div><span>REMOTE CONTROL</span><strong>Arrows + Select</strong></div></div>
-          <button id="help-btn" class="secondary-btn focusable">Remote shortcuts &amp; help</button>
+          <h3>Made for your TV. Yours to arrange.</h3>
+          <p>FastTV shows Samsung apps when the local TizenBrew service can read them, along with installed TizenBrew modules. Launching individual TV apps still depends on Samsung permissions.</p>
+          <p>FastTV is an Apple TV–inspired launcher, not a replacement for Tizen, the Samsung Home button, or the television's firmware.</p>
+          <button id="help-btn" class="hero-button focusable">Remote controls &amp; help →</button>
         </div>
       </section>
-      <footer class="footer"><span>← ↑ ↓ → Navigate &nbsp; • &nbsp; OK Open module &nbsp; • &nbsp; ☆ Favourite</span><span>FastTV 1.0 &nbsp; · &nbsp; Made for Dilkash</span></footer>
+      <footer class="footer">
+        <span>◀ ▲ ▼ ▶ Navigate &nbsp; · &nbsp; OK Open &nbsp; · &nbsp; ☆ Favourite</span>
+        <span>FastTV 2.0 &nbsp; / &nbsp; Dilkash Edition</span>
+      </footer>
     </main>
   </div>
 
@@ -83,13 +87,13 @@
   <div id="help-overlay" class="overlay" hidden>
     <div class="help-dialog" role="dialog" aria-modal="true" aria-labelledby="help-title">
       <span class="eyebrow">REMOTE GUIDE</span>
-      <h2 id="help-title">Simple controls.</h2>
-      <p>Use the remote's arrow keys to move, then press OK to open a TizenBrew module. Choose the star on any card to add or remove a favourite. Use Return/Back to close this guide.</p>
-      <p>On a keyboard, press <strong>F</strong> while a module is selected to toggle its favourite. The yellow remote key works where available.</p>
-      <button id="close-help" class="primary-btn focusable">Got it →</button>
+      <h2 id="help-title">Sit back. You're home.</h2>
+      <p>Use arrow keys to select an app and press the remote's centre OK button to launch it. Select the ☆ on a tile to make it a favourite.</p>
+      <p>If Samsung prevents an app from opening, use the TV's regular Home screen for that app. TV app discovery needs the local FastTV service; the dashboard still works if it is unavailable.</p>
+      <p>Use Back/Return to come back to this screen. The yellow key or keyboard F toggles a focused app's favourite.</p>
+      <button id="close-help" class="hero-button focusable">Back to my apps →</button>
     </div>
   </div>
-
   <script src="core.js"></script>
   <script src="app.js"></script>
 </body>
