@@ -1,0 +1,14 @@
+{
+  "name": "fasttv-dilkash-tizenbrew",
+  "version": "1.0.0",
+  "description": "A fast Windows-style dashboard for installed TizenBrew application modules.",
+  "packageType": "app",
+  "appName": "FastTV - Dilkash Edition",
+  "appPath": "app/index.html",
+  "keys": [],
+  "license": "MIT",
+  "keywords": ["tizenbrew", "samsung-tv", "dashboard", "launcher", "fasttv"],
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
+  }
+}
